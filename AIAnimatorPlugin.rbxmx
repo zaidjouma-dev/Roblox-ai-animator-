@@ -10,7 +10,7 @@
 local HttpService = game:GetService("HttpService")
 local Selection = game:GetService("Selection")
 
-local BACKEND_URL = "https://YOUR-RAILWAY-APP.railway.app/generate"
+local BACKEND_URL = "https://roblox-ai-animator-production.up.railway.app"
 
 local toolbar = plugin:CreateToolbar("AI Animator")
 local toggleButton = toolbar:CreateButton("AI Animator", "Open AI Animation Generator", "rbxassetid://14978048121")
