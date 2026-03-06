@@ -6,79 +6,76 @@ from flask_cors import CORS
 from groq import Groq
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(**name**)
+logger = logging.getLogger(__name__)
 
-app = Flask(**name**)
+app = Flask(__name__)
 CORS(app)
 
-client = Groq(api_key=os.environ.get(‘GROQ_API_KEY’))
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
 SYSTEM_PROMPT = (
-’You are a Roblox animation generator. Generate keyframe animation data as valid JSON only. ’
-’No extra text, no markdown, no code blocks. Just raw JSON. ’
-’For R6 rigs use bones: HumanoidRootPart, Torso, Head, Left Arm, Right Arm, Left Leg, Right Leg. ’
-’For R15 rigs use bones: HumanoidRootPart, UpperTorso, LowerTorso, Head, LeftUpperArm, LeftLowerArm, LeftHand, RightUpperArm, RightLowerArm, RightHand, LeftUpperLeg, LeftLowerLeg, LeftFoot, RightUpperLeg, RightLowerLeg, RightFoot. ’
-’Return ONLY this JSON structure with 4-6 keyframes: ’
-’{“keyframes”: [{“time”: 0, “poses”: {“HumanoidRootPart”: {“position”: [0,0,0], “rotation”: [0,0,0], “easingStyle”: “Linear”, “easingDirection”: “Out”}}}]}. ’
-‘Use realistic rotation values in degrees.’
+    "You are a Roblox animation generator. Generate keyframe animation data as valid JSON only. "
+    "No extra text, no markdown, no code blocks. Just raw JSON. "
+    "For R6 rigs use bones: HumanoidRootPart, Torso, Head, Left Arm, Right Arm, Left Leg, Right Leg. "
+    "For R15 rigs use bones: HumanoidRootPart, UpperTorso, LowerTorso, Head, LeftUpperArm, LeftLowerArm, LeftHand, RightUpperArm, RightLowerArm, RightHand, LeftUpperLeg, LeftLowerLeg, LeftFoot, RightUpperLeg, RightLowerLeg, RightFoot. "
+    "Return ONLY a JSON object with a keyframes array containing 4-6 keyframes. "
+    "Use realistic rotation values in degrees."
 )
 
-@app.route(’/health’, methods=[‘GET’])
+@app.route("/health", methods=["GET"])
 def health():
-return jsonify({‘status’: ‘online’, ‘service’: ‘Roblox AI Animator Backend’})
+    return jsonify({"status": "online", "service": "Roblox AI Animator Backend"})
 
-@app.route(’/generate’, methods=[‘POST’])
+@app.route("/generate", methods=["POST"])
 def generate():
-raw = None
-try:
-data = request.get_json()
-if not data:
-return jsonify({‘error’: ‘No JSON body’}), 400
+    raw = None
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({"error": "No JSON body"}), 400
 
-```
-    prompt = data.get('prompt', 'idle animation')
-    rig_type = data.get('rigType', 'R6')
-    loop = data.get('loop', True)
+        prompt = data.get("prompt", "idle animation")
+        rig_type = data.get("rigType", "R6")
+        loop = data.get("loop", True)
 
-    logger.info('[Request] Prompt: %s | Rig: %s', prompt, rig_type)
+        logger.info("[Request] Prompt: %s | Rig: %s", prompt, rig_type)
 
-    user_message = 'Generate a ' + prompt + ' animation for a ' + rig_type + ' rig. Loop: ' + str(loop) + '.'
+        user_message = "Generate a " + prompt + " animation for a " + rig_type + " rig. Loop: " + str(loop) + "."
 
-    response = client.chat.completions.create(
-        model='mixtral-8x7b-32768',
-        messages=[
-            {'role': 'system', 'content': SYSTEM_PROMPT},
-            {'role': 'user', 'content': user_message}
-        ],
-        max_tokens=2000,
-        temperature=0.3
-    )
+        response = client.chat.completions.create(
+            model="mixtral-8x7b-32768",
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": user_message}
+            ],
+            max_tokens=2000,
+            temperature=0.3
+        )
 
-    raw = response.choices[0].message.content.strip()
-    logger.info('[Groq Response] %s', raw[:300])
+        raw = response.choices[0].message.content.strip()
+        logger.info("[Groq Response] %s", raw[:300])
 
-    if raw.startswith('```'):
-        raw = raw.split('```')[1]
-        if raw.startswith('json'):
-            raw = raw[4:]
-    raw = raw.strip()
+        if raw.startswith("```"):
+            raw = raw.split("```")[1]
+            if raw.startswith("json"):
+                raw = raw[4:]
+        raw = raw.strip()
 
-    anim_data = json.loads(raw)
+        anim_data = json.loads(raw)
 
-    if 'keyframes' not in anim_data:
-        return jsonify({'error': 'No keyframes in response', 'raw': raw}), 500
+        if "keyframes" not in anim_data:
+            return jsonify({"error": "No keyframes in response", "raw": raw}), 500
 
-    logger.info('[Success] Generated %d keyframes', len(anim_data['keyframes']))
-    return jsonify(anim_data)
+        logger.info("[Success] Generated %d keyframes", len(anim_data["keyframes"]))
+        return jsonify(anim_data)
 
-except json.JSONDecodeError as e:
-    logger.error('[JSON Error] %s | Raw: %s', e, raw)
-    return jsonify({'error': 'AI returned invalid JSON', 'details': str(e)}), 500
-except Exception as e:
-    logger.error('[Error] %s', e)
-    return jsonify({'error': str(e)}), 500
-```
+    except json.JSONDecodeError as e:
+        logger.error("[JSON Error] %s | Raw: %s", e, raw)
+        return jsonify({"error": "AI returned invalid JSON", "details": str(e)}), 500
+    except Exception as e:
+        logger.error("[Error] %s", e)
+        return jsonify({"error": str(e)}), 500
 
-if **name** == ‘**main**’:
-port = int(os.environ.get(‘PORT’, 5000))
-app.run(host=‘0.0.0.0’, port=port, debug=False)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False)
