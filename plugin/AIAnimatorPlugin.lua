@@ -8,7 +8,7 @@ local Selection = game:GetService("Selection")
 local StudioService = game:GetService("StudioService")
 
 -- ⚠️ CHANGE THIS to your deployed backend URL
-local BACKEND_URL = "https://YOUR-RAILWAY-APP.railway.app/generate"
+local BACKEND_URL = "https://roblox-ai-animator-production.up.railway.app/"
 
 -- =============================================
 -- PLUGIN SETUP
