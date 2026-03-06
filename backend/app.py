@@ -13,8 +13,7 @@ logger = logging.getLogger(**name**)
 app = Flask(**name**)
 CORS(app)
 
-client = Groq(api_key=os.environ.get(“GROQ_API_KEY”))
-
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 SYSTEM_PROMPT = “”“You are a Roblox animation generator. Generate keyframe animation data as valid JSON only.
 No extra text, no markdown, no code blocks. Just raw JSON.
 
