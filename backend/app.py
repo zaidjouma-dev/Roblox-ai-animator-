@@ -11,7 +11,7 @@ logger = logging.getLogger(**name**)
 app = Flask(**name**)
 CORS(app)
 
-client = Groq(api_key=os.environ.get(“GROQ_API_KEY”))
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
 ANIMATION_EXAMPLES = [
 {“name”:“Idle”,“keyframes”:[{“time”:0,“poses”:{“Torso”:{“rx”:0,“ry”:0,“rz”:0},“Head”:{“rx”:5,“ry”:0,“rz”:0},“Left Arm”:{“rx”:-5,“ry”:0,“rz”:5},“Right Arm”:{“rx”:-5,“ry”:0,“rz”:-5},“Left Leg”:{“rx”:0,“ry”:0,“rz”:0},“Right Leg”:{“rx”:0,“ry”:0,“rz”:0}}},{“time”:0.5,“poses”:{“Torso”:{“rx”:2,“ry”:0,“rz”:0},“Head”:{“rx”:3,“ry”:0,“rz”:0},“Left Arm”:{“rx”:-3,“ry”:0,“rz”:5},“Right Arm”:{“rx”:-3,“ry”:0,“rz”:-5},“Left Leg”:{“rx”:0,“ry”:0,“rz”:0},“Right Leg”:{“rx”:0,“ry”:0,“rz”:0}}}]},
