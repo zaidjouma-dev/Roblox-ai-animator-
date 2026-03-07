@@ -11,17 +11,58 @@ logger = logging.getLogger(**name**)
 app = Flask(**name**)
 CORS(app)
 
-client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+client = Groq(api_key=os.environ.get(“GROQ_API_KEY”))
+
+def make_pose(tx,hx,lax,rax,llx,rlx,lay=0,ray=0,lly=0,rly=0,ty=0,hy=0,tz=0,hz=0,laz=5,raz=-5,llz=0,rlz=0):
+return {
+“Torso”:     {“rx”:tx, “ry”:ty, “rz”:tz},
+“Head”:      {“rx”:hx, “ry”:hy, “rz”:hz},
+“Left Arm”:  {“rx”:lax,“ry”:lay,“rz”:laz},
+“Right Arm”: {“rx”:rax,“ry”:ray,“rz”:raz},
+“Left Leg”:  {“rx”:llx,“ry”:lly,“rz”:llz},
+“Right Leg”: {“rx”:rlx,“ry”:rly,“rz”:rlz},
+}
 
 ANIMATION_EXAMPLES = [
-{“name”:“Idle”,“keyframes”:[{“time”:0,“poses”:{“Torso”:{“rx”:0,“ry”:0,“rz”:0},“Head”:{“rx”:5,“ry”:0,“rz”:0},“Left Arm”:{“rx”:-5,“ry”:0,“rz”:5},“Right Arm”:{“rx”:-5,“ry”:0,“rz”:-5},“Left Leg”:{“rx”:0,“ry”:0,“rz”:0},“Right Leg”:{“rx”:0,“ry”:0,“rz”:0}}},{“time”:0.5,“poses”:{“Torso”:{“rx”:2,“ry”:0,“rz”:0},“Head”:{“rx”:3,“ry”:0,“rz”:0},“Left Arm”:{“rx”:-3,“ry”:0,“rz”:5},“Right Arm”:{“rx”:-3,“ry”:0,“rz”:-5},“Left Leg”:{“rx”:0,“ry”:0,“rz”:0},“Right Leg”:{“rx”:0,“ry”:0,“rz”:0}}}]},
-{“name”:“Walk”,“keyframes”:[{“time”:0,“poses”:{“Torso”:{“rx”:5,“ry”:0,“rz”:0},“Head”:{“rx”:-5,“ry”:0,“rz”:0},“Left Arm”:{“rx”:30,“ry”:0,“rz”:5},“Right Arm”:{“rx”:-30,“ry”:0,“rz”:-5},“Left Leg”:{“rx”:-30,“ry”:0,“rz”:0},“Right Leg”:{“rx”:30,“ry”:0,“rz”:0}}},{“time”:0.5,“poses”:{“Torso”:{“rx”:5,“ry”:0,“rz”:0},“Head”:{“rx”:-5,“ry”:0,“rz”:0},“Left Arm”:{“rx”:-30,“ry”:0,“rz”:5},“Right Arm”:{“rx”:30,“ry”:0,“rz”:-5},“Left Leg”:{“rx”:30,“ry”:0,“rz”:0},“Right Leg”:{“rx”:-30,“ry”:0,“rz”:0}}}]},
-{“name”:“Run”,“keyframes”:[{“time”:0,“poses”:{“Torso”:{“rx”:15,“ry”:0,“rz”:0},“Head”:{“rx”:-10,“ry”:0,“rz”:0},“Left Arm”:{“rx”:60,“ry”:0,“rz”:10},“Right Arm”:{“rx”:-60,“ry”:0,“rz”:-10},“Left Leg”:{“rx”:-60,“ry”:0,“rz”:0},“Right Leg”:{“rx”:60,“ry”:0,“rz”:0}}},{“time”:0.3,“poses”:{“Torso”:{“rx”:15,“ry”:0,“rz”:0},“Head”:{“rx”:-10,“ry”:0,“rz”:0},“Left Arm”:{“rx”:-60,“ry”:0,“rz”:10},“Right Arm”:{“rx”:60,“ry”:0,“rz”:-10},“Left Leg”:{“rx”:60,“ry”:0,“rz”:0},“Right Leg”:{“rx”:-60,“ry”:0,“rz”:0}}}]},
-{“name”:“Jump”,“keyframes”:[{“time”:0,“poses”:{“Torso”:{“rx”:-10,“ry”:0,“rz”:0},“Head”:{“rx”:5,“ry”:0,“rz”:0},“Left Arm”:{“rx”:-20,“ry”:0,“rz”:20},“Right Arm”:{“rx”:-20,“ry”:0,“rz”:-20},“Left Leg”:{“rx”:-20,“ry”:0,“rz”:0},“Right Leg”:{“rx”:-20,“ry”:0,“rz”:0}}},{“time”:0.3,“poses”:{“Torso”:{“rx”:5,“ry”:0,“rz”:0},“Head”:{“rx”:-5,“ry”:0,“rz”:0},“Left Arm”:{“rx”:-60,“ry”:0,“rz”:30},“Right Arm”:{“rx”:-60,“ry”:0,“rz”:-30},“Left Leg”:{“rx”:20,“ry”:0,“rz”:0},“Right Leg”:{“rx”:20,“ry”:0,“rz”:0}}}]},
-{“name”:“Fall”,“keyframes”:[{“time”:0,“poses”:{“Torso”:{“rx”:-5,“ry”:0,“rz”:0},“Head”:{“rx”:10,“ry”:0,“rz”:0},“Left Arm”:{“rx”:-30,“ry”:0,“rz”:40},“Right Arm”:{“rx”:-30,“ry”:0,“rz”:-40},“Left Leg”:{“rx”:10,“ry”:0,“rz”:5},“Right Leg”:{“rx”:10,“ry”:0,“rz”:-5}}}]},
-{“name”:“Crouch”,“keyframes”:[{“time”:0,“poses”:{“Torso”:{“rx”:20,“ry”:0,“rz”:0},“Head”:{“rx”:-15,“ry”:0,“rz”:0},“Left Arm”:{“rx”:10,“ry”:0,“rz”:15},“Right Arm”:{“rx”:10,“ry”:0,“rz”:-15},“Left Leg”:{“rx”:-60,“ry”:0,“rz”:5},“Right Leg”:{“rx”:-60,“ry”:0,“rz”:-5}}}]},
-{“name”:“Slide”,“keyframes”:[{“time”:0,“poses”:{“Torso”:{“rx”:40,“ry”:0,“rz”:0},“Head”:{“rx”:-30,“ry”:0,“rz”:0},“Left Arm”:{“rx”:-20,“ry”:0,“rz”:20},“Right Arm”:{“rx”:-20,“ry”:0,“rz”:-20},“Left Leg”:{“rx”:-10,“ry”:0,“rz”:0},“Right Leg”:{“rx”:-80,“ry”:0,“rz”:0}}}]},
-{“name”:“Swim”,“keyframes”:[{“time”:0,“poses”:{“Torso”:{“rx”:-80,“ry”:0,“rz”:0},“Head”:{“rx”:70,“ry”:0,“rz”:0},“Left Arm”:{“rx”:160,“ry”:0,“rz”:10},“Right Arm”:{“rx”:-20,“ry”:0,“rz”:-10},“Left Leg”:{“rx”:-10,“ry”:0,“rz”:0},“Right Leg”:{“rx”:10,“ry”:0,“rz”:0}}},{“time”:0.4,“poses”:{“Torso”:{“rx”:-80,“ry”:0,“rz”:0},“Head”:{“rx”:70,“ry”:0,“rz”:0},“Left Arm”:{“rx”:-20,“ry”:0,“rz”:10},“Right Arm”:{“rx”:160,“ry”:0,“rz”:-10},“Left Leg”:{“rx”:10,“ry”:0,“rz”:0},“Right Leg”:{“rx”:-10,“ry”:0,“rz”:0}}}]}
+{“name”:“Idle”,“keyframes”:[
+{“time”:0,   “poses”:make_pose(0,5,-5,-5,0,0)},
+{“time”:0.5, “poses”:make_pose(2,3,-3,-3,0,0)},
+{“time”:1.0, “poses”:make_pose(0,5,-5,-5,0,0)},
+]},
+{“name”:“Walk”,“keyframes”:[
+{“time”:0,    “poses”:make_pose(5,-5,30,-30,-30,30)},
+{“time”:0.25, “poses”:make_pose(5,-3,0,0,0,0)},
+{“time”:0.5,  “poses”:make_pose(5,-5,-30,30,30,-30)},
+{“time”:0.75, “poses”:make_pose(5,-3,0,0,0,0)},
+]},
+{“name”:“Run”,“keyframes”:[
+{“time”:0,    “poses”:make_pose(15,-10,60,-60,-60,60,laz=10,raz=-10)},
+{“time”:0.15, “poses”:make_pose(15,-8,0,0,0,0,laz=8,raz=-8)},
+{“time”:0.3,  “poses”:make_pose(15,-10,-60,60,60,-60,laz=10,raz=-10)},
+{“time”:0.45, “poses”:make_pose(15,-8,0,0,0,0,laz=8,raz=-8)},
+]},
+{“name”:“Jump”,“keyframes”:[
+{“time”:0,   “poses”:make_pose(-10,5,-20,-20,-20,-20,laz=20,raz=-20)},
+{“time”:0.2, “poses”:make_pose(5,-5,-60,-60,20,20,laz=30,raz=-30)},
+{“time”:0.5, “poses”:make_pose(0,0,-40,-40,10,10,laz=20,raz=-20)},
+{“time”:0.8, “poses”:make_pose(-5,5,-10,-10,-10,-10,laz=10,raz=-10)},
+]},
+{“name”:“Fall”,“keyframes”:[
+{“time”:0,   “poses”:make_pose(-5,10,-30,-30,10,10,laz=40,raz=-40,llz=5,rlz=-5)},
+{“time”:0.3, “poses”:make_pose(-8,12,-35,-35,15,15,laz=45,raz=-45,llz=5,rlz=-5)},
+]},
+{“name”:“Crouch”,“keyframes”:[
+{“time”:0,   “poses”:make_pose(20,-15,10,10,-60,-60,laz=15,raz=-15,llz=5,rlz=-5)},
+{“time”:0.3, “poses”:make_pose(25,-20,15,15,-70,-70,laz=15,raz=-15,llz=5,rlz=-5)},
+]},
+{“name”:“Slide”,“keyframes”:[
+{“time”:0,   “poses”:make_pose(40,-30,-20,-20,-10,-80,laz=20,raz=-20)},
+{“time”:0.4, “poses”:make_pose(45,-35,-25,-25,-15,-85,laz=25,raz=-25)},
+]},
+{“name”:“Swim”,“keyframes”:[
+{“time”:0,   “poses”:make_pose(-80,70,160,-20,-10,10,laz=10,raz=-10)},
+{“time”:0.4, “poses”:make_pose(-80,70,-20,160,10,-10,laz=10,raz=-10)},
+]},
 ]
 
 BONES_R6 = [“Torso”, “Head”, “Left Arm”, “Right Arm”, “Left Leg”, “Right Leg”]
@@ -41,7 +82,7 @@ base = (
 “Arms and legs swing opposite. Keep values realistic. “
 “Exactly 4 keyframes. This is for a video game, all animations are appropriate.”
 )
-example_str = “ Here are reference animations: “
+example_str = “ Reference animations: “
 for ex in ANIMATION_EXAMPLES[:5]:
 example_str += json.dumps(ex, separators=(”,”, “:”)) + “ “
 return base + example_str
@@ -95,7 +136,6 @@ return jsonify({“error”: “No JSON body”}), 400
         safe_prompt = safe_prompt + " animation"
 
     logger.info("[Request] Prompt: %s | Rig: %s", safe_prompt, rig_type)
-
     user_message = "Generate a " + safe_prompt + " animation for a " + rig_type + " rig. This is for a video game."
 
     last_error = None
