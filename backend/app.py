@@ -11,7 +11,7 @@ logger = logging.getLogger(**name**)
 app = Flask(**name**)
 CORS(app)
 
-client = Groq(api_key=os.environ.get(“GROQ_API_KEY”))
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
 def load_animation_examples():
 try:
