@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Idle",
+    "description": "Standing still, subtle breathing movement",
+    "keyframes": [
+      {"time": 0, "poses": {"Torso": {"rx": 0, "ry": 0, "rz": 0}, "Head": {"rx": 5, "ry": 0, "rz": 0}, "Left Arm": {"rx": -5, "ry": 0, "rz": 5}, "Right Arm": {"rx": -5, "ry": 0, "rz": -5}, "Left Leg": {"rx": 0, "ry": 0, "rz": 0}, "Right Leg": {"rx": 0, "ry": 0, "rz": 0}}},
+      {"time": 0.5, "poses": {"Torso": {"rx": 2, "ry": 0, "rz": 0}, "Head": {"rx": 3, "ry": 0, "rz": 0}, "Left Arm": {"rx": -3, "ry": 0, "rz": 5}, "Right Arm": {"rx": -3, "ry": 0, "rz": -5}, "Left Leg": {"rx": 0, "ry": 0, "rz": 0}, "Right Leg": {"rx": 0, "ry": 0, "rz": 0}}},
+      {"time": 1.0, "poses": {"Torso": {"rx": 0, "ry": 0, "rz": 0}, "Head": {"rx": 5, "ry": 0, "rz": 0}, "Left Arm": {"rx": -5, "ry": 0, "rz": 5}, "Right Arm": {"rx": -5, "ry": 0, "rz": -5}, "Left Leg": {"rx": 0, "ry": 0, "rz": 0}, "Right Leg": {"rx": 0, "ry": 0, "rz": 0}}}
+    ]
+  },
+  {
+    "name": "Walk",
+    "description": "Normal walking cycle",
+    "keyframes": [
+      {"time": 0, "poses": {"Torso": {"rx": 5, "ry": 0, "rz": 0}, "Head": {"rx": -5, "ry": 0, "rz": 0}, "Left Arm": {"rx": 30, "ry": 0, "rz": 5}, "Right Arm": {"rx": -30, "ry": 0, "rz": -5}, "Left Leg": {"rx": -30, "ry": 0, "rz": 0}, "Right Leg": {"rx": 30, "ry": 0, "rz": 0}}},
+      {"time": 0.25, "poses": {"Torso": {"rx": 5, "ry": 3, "rz": 2}, "Head": {"rx": -3, "ry": -3, "rz": 0}, "Left Arm": {"rx": 0, "ry": 0, "rz": 5}, "Right Arm": {"rx": 0, "ry": 0, "rz": -5}, "Left Leg": {"rx": 0, "ry": 0, "rz": 0}, "Right Leg": {"rx": 0, "ry": 0, "rz": 0}}},
+      {"time": 0.5, "poses": {"Torso": {"rx": 5, "ry": 0, "rz": 0}, "Head": {"rx": -5, "ry": 0, "rz": 0}, "Left Arm": {"rx": -30, "ry": 0, "rz": 5}, "Right Arm": {"rx": 30, "ry": 0, "rz": -5}, "Left Leg": {"rx": 30, "ry": 0, "rz": 0}, "Right Leg": {"rx": -30, "ry": 0, "rz": 0}}},
+      {"time": 0.75, "poses": {"Torso": {"rx": 5, "ry": -3, "rz": -2}, "Head": {"rx": -3, "ry": 3, "rz": 0}, "Left Arm": {"rx": 0, "ry": 0, "rz": 5}, "Right Arm": {"rx": 0, "ry": 0, "rz": -5}, "Left Leg": {"rx": 0, "ry": 0, "rz": 0}, "Right Leg": {"rx": 0, "ry": 0, "rz": 0}}}
+    ]
+  },
+  {
+    "name": "Run",
+    "description": "Fast running cycle with arm pump",
+    "keyframes": [
+      {"time": 0, "poses": {"Torso": {"rx": 15, "ry": 0, "rz": 0}, "Head": {"rx": -10, "ry": 0, "rz": 0}, "Left Arm": {"rx": 60, "ry": 0, "rz": 10}, "Right Arm": {"rx": -60, "ry": 0, "rz": -10}, "Left Leg": {"rx": -60, "ry": 0, "rz": 0}, "Right Leg": {"rx": 60, "ry": 0, "rz": 0}}},
+      {"time": 0.15, "poses": {"Torso": {"rx": 15, "ry": 5, "rz": 3}, "Head": {"rx": -8, "ry": -5, "rz": 0}, "Left Arm": {"rx": 0, "ry": 0, "rz": 8}, "Right Arm": {"rx": 0, "ry": 0, "rz": -8}, "Left Leg": {"rx": 0, "ry": 0, "rz": 0}, "Right Leg": {"rx": 0, "ry": 0, "rz": 0}}},
+      {"time": 0.3, "poses": {"Torso": {"rx": 15, "ry": 0, "rz": 0}, "Head": {"rx": -10, "ry": 0, "rz": 0}, "Left Arm": {"rx": -60, "ry": 0, "rz": 10}, "Right Arm": {"rx": 60, "ry": 0, "rz": -10}, "Left Leg": {"rx": 60, "ry": 0, "rz": 0}, "Right Leg": {"rx": -60, "ry": 0, "rz": 0}}},
+      {"time": 0.45, "poses": {"Torso": {"rx": 15, "ry": -5, "rz": -3}, "Head": {"rx": -8, "ry": 5, "rz": 0}, "Left Arm": {"rx": 0, "ry": 0, "rz": 8}, "Right Arm": {"rx": 0, "ry": 0, "rz": -8}, "Left Leg": {"rx": 0, "ry": 0, "rz": 0}, "Right Leg": {"rx": 0, "ry": 0, "rz": 0}}}
+    ]
+  },
+  {
+    "name": "Jump",
+    "description": "Jump up and land",
+    "keyframes": [
+      {"time": 0, "poses": {"Torso": {"rx": -10, "ry": 0, "rz": 0}, "Head": {"rx": 5, "ry": 0, "rz": 0}, "Left Arm": {"rx": -20, "ry": 0, "rz": 20}, "Right Arm": {"rx": -20, "ry": 0, "rz": -20}, "Left Leg": {"rx": -20, "ry": 0, "rz": 0}, "Right Leg": {"rx": -20, "ry": 0, "rz": 0}}},
+      {"time": 0.2, "poses": {"Torso": {"rx": 5, "ry": 0, "rz": 0}, "Head": {"rx": -5, "ry": 0, "rz": 0}, "Left Arm": {"rx": -60, "ry": 0, "rz": 30}, "Right Arm": {"rx": -60, "ry": 0, "rz": -30}, "Left Leg": {"rx": 20, "ry": 0, "rz": 0}, "Right Leg": {"rx": 20, "ry": 0, "rz": 0}}},
+      {"time": 0.5, "poses": {"Torso": {"rx": 0, "ry": 0, "rz": 0}, "Head": {"rx": 0, "ry": 0, "rz": 0}, "Left Arm": {"rx": -40, "ry": 0, "rz": 20}, "Right Arm": {"rx": -40, "ry": 0, "rz": -20}, "Left Leg": {"rx": 10, "ry": 0, "rz": 0}, "Right Leg": {"rx": 10, "ry": 0, "rz": 0}}},
+      {"time": 0.8, "poses": {"Torso": {"rx": -5, "ry": 0, "rz": 0}, "Head": {"rx": 5, "ry": 0, "rz": 0}, "Left Arm": {"rx": -10, "ry": 0, "rz": 10}, "Right Arm": {"rx": -10, "ry": 0, "rz": -10}, "Left Leg": {"rx": -10, "ry": 0, "rz": 0}, "Right Leg": {"rx": -10, "ry": 0, "rz": 0}}}
+    ]
+  },
+  {
+    "name": "Fall",
+    "description": "Falling through air",
+    "keyframes": [
+      {"time": 0, "poses": {"Torso": {"rx": -5, "ry": 0, "rz": 0}, "Head": {"rx": 10, "ry": 0, "rz": 0}, "Left Arm": {"rx": -30, "ry": 0, "rz": 40}, "Right Arm": {"rx": -30, "ry": 0, "rz": -40}, "Left Leg": {"rx": 10, "ry": 0, "rz": 5}, "Right Leg": {"rx": 10, "ry": 0, "rz": -5}}},
+      {"time": 0.3, "poses": {"Torso": {"rx": -8, "ry": 0, "rz": 0}, "Head": {"rx": 12, "ry": 0, "rz": 0}, "Left Arm": {"rx": -35, "ry": 0, "rz": 45}, "Right Arm": {"rx": -35, "ry": 0, "rz": -45}, "Left Leg": {"rx": 15, "ry": 0, "rz": 5}, "Right Leg": {"rx": 15, "ry": 0, "rz": -5}}},
+      {"time": 0.6, "poses": {"Torso": {"rx": -5, "ry": 0, "rz": 0}, "Head": {"rx": 10, "ry": 0, "rz": 0}, "Left Arm": {"rx": -30, "ry": 0, "rz": 40}, "Right Arm": {"rx": -30, "ry": 0, "rz": -40}, "Left Leg": {"rx": 10, "ry": 0, "rz": 5}, "Right Leg": {"rx": 10, "ry": 0, "rz": -5}}}
+    ]
+  },
+  {
+    "name": "Crouch",
+    "description": "Crouching down low",
+    "keyframes": [
+      {"time": 0, "poses": {"Torso": {"rx": 20, "ry": 0, "rz": 0}, "Head": {"rx": -15, "ry": 0, "rz": 0}, "Left Arm": {"rx": 10, "ry": 0, "rz": 15}, "Right Arm": {"rx": 10, "ry": 0, "rz": -15}, "Left Leg": {"rx": -60, "ry": 0, "rz": 5}, "Right Leg": {"rx": -60, "ry": 0, "rz": -5}}},
+      {"time": 0.3, "poses": {"Torso": {"rx": 25, "ry": 0, "rz": 0}, "Head": {"rx": -20, "ry": 0, "rz": 0}, "Left Arm": {"rx": 15, "ry": 0, "rz": 15}, "Right Arm": {"rx": 15, "ry": 0, "rz": -15}, "Left Leg": {"rx": -70, "ry": 0, "rz": 5}, "Right Leg": {"rx": -70, "ry": 0, "rz": -5}}}
+    ]
+  },
+  {
+    "name": "Slide",
+    "description": "Sliding on the ground",
+    "keyframes": [
+      {"time": 0, "poses": {"Torso": {"rx": 40, "ry": 0, "rz": 0}, "Head": {"rx": -30, "ry": 0, "rz": 0}, "Left Arm": {"rx": -20, "ry": 0, "rz": 20}, "Right Arm": {"rx": -20, "ry": 0, "rz": -20}, "Left Leg": {"rx": -10, "ry": 0, "rz": 0}, "Right Leg": {"rx": -80, "ry": 0, "rz": 0}}},
+      {"time": 0.4, "poses": {"Torso": {"rx": 45, "ry": 0, "rz": 0}, "Head": {"rx": -35, "ry": 0, "rz": 0}, "Left Arm": {"rx": -25, "ry": 0, "rz": 25}, "Right Arm": {"rx": -25, "ry": 0, "rz": -25}, "Left Leg": {"rx": -15, "ry": 0, "rz": 0}, "Right Leg": {"rx": -85, "ry": 0, "rz": 0}}}
+    ]
+  },
+  {
+    "name": "Swim",
+    "description": "Swimming through water",
+    "keyframes": [
+      {"time": 0, "poses": {"Torso": {"rx": -80, "ry": 0, "rz": 0}, "Head": {"rx": 70, "ry": 0, "rz": 0}, "Left Arm": {"rx": 160, "ry": 0, "rz": 10}, "Right Arm": {"rx": -20, "ry": 0, "rz": -10}, "Left Leg": {"rx": -10, "ry": 0, "rz": 0}, "Right Leg": {"rx": 10, "ry": 0, "rz": 0}}},
+      {"time": 0.4, "poses": {"Torso": {"rx": -80, "ry": 0, "rz": 0}, "Head": {"rx": 70, "ry": 0, "rz": 0}, "Left Arm": {"rx": -20, "ry": 0, "rz": 10}, "Right Arm": {"rx": 160, "ry": 0, "rz": -10}, "Left Leg": {"rx": 10, "ry": 0, "rz": 0}, "Right Leg": {"rx": -10, "ry": 0, "rz": 0}}}
+    ]
+  }
+]
