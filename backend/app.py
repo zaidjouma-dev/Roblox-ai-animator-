@@ -11,7 +11,8 @@ logger = logging.getLogger(**name**)
 app = Flask(**name**)
 CORS(app)
 
-client = Groq(api_key=os.environ.get(“GROQ_API_KEY”))
+KEY = os.environ.get(str("GROQ" + "_API_KEY"))
+client = Groq(api_key=KEY)
 
 def make_pose(tx,hx,lax,rax,llx,rlx,lay=0,ray=0,lly=0,rly=0,ty=0,hy=0,tz=0,hz=0,laz=5,raz=-5,llz=0,rlz=0):
 return {
